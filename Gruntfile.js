@@ -91,7 +91,7 @@ module.exports = function (grunt) {
                     cwd: '<%= yeoman.app %>',
                     dest: '<%= yeoman.dist %>',
                     src: [
-                        'angular-swipe.js'
+                        'angular-swipe-tagsite.js'
                     ]
                 }]
             }
@@ -102,18 +102,18 @@ module.exports = function (grunt) {
             separator: ';'
           },
           dist: {
-            src: ['<%= yeoman.app %>/angular-swipe.js'],
-            dest: '<%= yeoman.dist %>/angular-swipe.min.js'
+            src: ['<%= yeoman.app %>/angular-swipe-tagsite.js'],
+            dest: '<%= yeoman.dist %>/angular-swipe-tagsite.min.js'
           }
         },
 
         uglify: {
           options: {
-            banner: '/*! angular-swipe.min.js <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+            banner: '/*! angular-swipe-tagsite.min.js <%= grunt.template.today("dd-mm-yyyy") %> */\n'
           },
           dist: {
             files: {
-              'dist/angular-swipe.min.js': ['<%= concat.dist.dest %>']
+              'dist/angular-swipe-tagsite.min.js': ['<%= concat.dist.dest %>']
             }
           }
         }
