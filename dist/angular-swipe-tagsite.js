@@ -110,7 +110,7 @@
               ratio = deltaY / deltaX;
 
               if (ratio < MAX_RATIO){
-                event.preventDefault();
+                // event.preventDefault();
                 isVertical = false;
               } else {
                 isVertical = true;
@@ -137,7 +137,7 @@
   }]);
 
   function makeSwipeDirective(directiveName, direction, axis, eventName) {
-    ngSwipe.directive(directiveName, ['$parse', 'swipe', function($parse, swipe) {
+    ngSwipe.directive(directiveName, ['$parse', 'swipe', 'screenSize', function($parse, swipe, screenSize) {
 
       var MAX_OTHER_AXIS_DISTANCE = 75;
       var MAX_RATIO = 0.3;
@@ -178,11 +178,46 @@
           pointerTypes.push('mouse');
         }
 
+        function canScrollDown() {
+          // get scroll distance between bottom of screen and bottom of section
+          var section = angular.element('.pt-page-current');
+          var sectionHeight = section[0].scrollHeight;
+          var viewportHeight = angular.element('.pt-trigger-container').height();
+          var scrollTop = section.scrollTop();
+          var distanceFromBottom = sectionHeight - viewportHeight - scrollTop;
+          if (distanceFromBottom > 0) {
+            return true;
+          }
+          return false;
+        }
+
+        function canScrollUp() {
+          // get scroll distance between top of screen and top of section
+          var section = angular.element('.pt-page-current');
+          var scrollTop = section.scrollTop();
+          if (scrollTop > 0) {
+            return true;
+          }
+          return false;
+        }
+
+        var atTopEdge = false;
+        var atBottomEdge = false;
+
         swipe.bind(element, {
           'start': function(coords, event) {
+            atTopEdge = !canScrollUp();
+            atBottomEdge = !canScrollDown();
             var className = event.target.getAttribute('class');
-            if (axis && (! className || className && className.match('noPreventDefault') === null)) {
-              event.preventDefault();
+
+            var targetAnchor = angular.element(event.target).is('a');
+            var notNoPreventDefaultElement = className && className.match('noPreventDefault') === null;
+
+            if (axis && ((! className || notNoPreventDefaultElement) && !targetAnchor)) {
+              if (screenSize.is('desktop') && !(canScrollUp() || canScrollDown())) {
+                // screenSize is desktop, prevent default swipe
+                event.preventDefault ? event.preventDefault() : event.returnValue = false;
+              }
             }
             startCoords = coords;
             valid = true;
@@ -192,6 +227,17 @@
           },
           'end': function(coords, event) {
             if (validSwipe(coords)) {
+
+              if (eventName === 'swipeup' && !atBottomEdge) {
+                // don't trigger swipe activity
+                return;
+              }
+
+              if (eventName === 'swipedown' && !atTopEdge) {
+                // don't trigger swipe activity
+                return;
+              }
+
               scope.$apply(function() {
                 element.triggerHandler(eventName);
                 swipeHandler(scope, { $event: event });
