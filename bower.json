@@ -1,14 +1,15 @@
 {
-  "name": "angular-swipe",
-  "description": "Simple vertical and horizontal swipe gesture directive for angular js",
-  "version": "0.1.0",
+  "name": "angular-swipe-tagsite",
+  "description": "Simple vertical and horizontal swipe gesture directive for angular js (forked for Tag Site)",
+  "version": "0.1.1",
   "authors": [
-    "marmorkuchen.net <andreas@marmorkuchen.net>"
+    "marmorkuchen.net <andreas@marmorkuchen.net>",
+    "jbkly <jordan@bkly.org>"
   ],
-  "homepage": "https://github.com/marmorkuchen-net/angular-swipe",
+  "homepage": "https://github.com/jbkly/angular-swipe-tagsite",
   "repository": {
     "type": "git",
-    "url": "git@github.com:marmorkuchen-net/angular-swipe.git"
+    "url": "git@github.com:jbkly/angular-swipe-tagsite.git"
   },
   "keywords": [
     "swipe",
@@ -21,7 +22,7 @@
     "angular",
     "directive"
   ],
-  "main": "./dist/angular-swipe.js",
+  "main": "./dist/angular-swipe-tagsite.js",
   "dependencies": {
     "angular": "~1.4.x"
   },

@@ -9,14 +9,14 @@ Simple vertical/horizontal swipe gesture directives and a swipe service for angu
 
 >
 ``` JavaScript
-"angular-swipe": "~0.1.0"
+"angular-swipe-tagsite": "~0.1.1"
 ```
 
 + Include the required source file (this path or similar)
 
 >
 ``` html
-<script src="bower_components/dist/angular-swipe.js"></script>
+<script src="bower_components/dist/angular-swipe-tagsite.js"></script>
 ```
 
 + Inject the `swipe` module into your app.
