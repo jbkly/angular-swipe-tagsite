@@ -1,4 +1,4 @@
-angular-swipe
+angular-swipe-tagsite (forked for Tag site redesign)
 =============
 
 Simple vertical/horizontal swipe gesture directives and a swipe service for angular js >= 1.4. Small extension of the existing angular $swipe service.
